@@ -16,6 +16,8 @@ import static frc.robot.Constants.DrivetrainConstants.*;
 
 import edu.wpi.first.wpilibj.XboxController;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class Climber extends SubsystemBase {
     
@@ -30,8 +32,9 @@ public class Climber extends SubsystemBase {
     public Climber(){
         //slaveClimberMotor.follow(masterClimberMotor);
         //slaveClimberMotor.setInverted(kMotorInvert);
-
         masterClimberMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
+        //SmartDashboard.putNumber("ClimbEncoder",0);
+        masterClimberMotor.setSelectedSensorPosition(0);
     }
 
 
@@ -43,10 +46,15 @@ public class Climber extends SubsystemBase {
 
     public void climbExtend(XboxController xbox){
         masterClimberMotor.set(ControlMode.PercentOutput, -0.3);
+        SmartDashboard.putNumber("ClimbEncoder", masterClimberMotor.getSelectedSensorPosition());
     }
 
     public void climbRetract(XboxController xbox){
+      while(masterClimberMotor.getSelectedSensorPosition() <= 0) //  the more negative the value is, the higher the hook of the climber. 0 should be when it is at rest position and fully retracted. This line is to make sure that the value doesn't go higher than the starting position
+      {
         masterClimberMotor.set(ControlMode.PercentOutput, 0.3);
+        SmartDashboard.putNumber("ClimbEncoder", masterClimberMotor.getSelectedSensorPosition());
+      }
     }
 
     @Override

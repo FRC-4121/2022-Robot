@@ -42,6 +42,7 @@ public final class Constants {
     //Climber
     public static final int kPIDLoopIdxClimb = 0;
     public static final int kTimeoutMsClimb = 20;
+    public static final int maxHeight = -135000; //TBD encoder raw sensor units (2048 in one rotation) for max height that climber should go
 
 
 
