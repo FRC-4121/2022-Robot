@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//bruh
+
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -37,6 +38,7 @@ public class RobotContainer {
   private final Processor intake = new Processor();
   private final Climber climber = new Climber();
   private final RightClimber rightClimber = new RightClimber();
+  private final Shooter shooter = new Shooter();
 
 
   //Commands
@@ -50,6 +52,8 @@ public class RobotContainer {
   private final RightExtendClimber rightextendClimberCommand = new RightExtendClimber(rightClimber, xbox);
   private final RightRetractClimber rightretractClimberCommand = new RightRetractClimber(rightClimber, xbox);
 
+  //Shooting
+  private final ShootBall shooterCommand = new ShootBall(shooter, xbox);
   
 
   //Buttons
@@ -58,6 +62,7 @@ public class RobotContainer {
   private final JoystickButton climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
   private final JoystickButton rightclimberExtendButton = new JoystickButton(xbox, xboxBButton);
   private final JoystickButton rightclimberRetractButton = new JoystickButton(xbox, xboxYButton);
+  private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
 
   //Driving
   private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
@@ -103,6 +108,9 @@ public class RobotContainer {
     climberRetractButton.whileHeld(retractClimberCommand);
     rightclimberExtendButton.whileHeld(rightextendClimberCommand);
     rightclimberRetractButton.whileHeld(rightretractClimberCommand);
+
+    //shooter
+    shooterButton.whileHeld(shooterCommand);
   }
 
  /**
