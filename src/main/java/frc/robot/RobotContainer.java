@@ -70,7 +70,7 @@ public class RobotContainer {
   
 
   // Processor
-  private final RunIntake intakeCommand = new RunIntake(intake, xbox);
+  //private final RunIntake intakeCommand = new RunIntake(intake, xbox);
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
