@@ -7,16 +7,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.Processor;
+import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Processor intakeProcessor;
+  private final Intake mainIntake;
   private XboxController xboxJoysticks;
 
 
-  public RunIntake(Processor intake, XboxController xbox){
-    intakeProcessor = intake;
+  public RunIntake(Intake intake, XboxController xbox){
+    mainIntake = intake;
     xboxJoysticks = xbox;
 
     addRequirements(intake);
@@ -29,13 +29,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-      intakeProcessor.runIntake(xboxJoysticks);      
+      mainIntake.runIntake(xboxJoysticks);      
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeProcessor.stopIntake(xboxJoysticks);
+    mainIntake.stopIntake(xboxJoysticks);
   }
 
   // Returns true when the command should end.

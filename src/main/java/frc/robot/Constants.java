@@ -30,9 +30,15 @@ public final class Constants {
     
     //processor motors
     public static final int INTAKE=5;
+<<<<<<< HEAD
     public static final int FEEDER = 999;
     public static final int SHOOTER = 999;
 
+=======
+    //need to fix this
+    public static final int INTAKERELEASE=99;
+    
+>>>>>>> d01de591db9266b6394915b183e57c423da4d8d9
     //Drive control port IDs
     public static final int XBOX_PORT = 0;
 
