@@ -27,7 +27,9 @@ public final class Constants {
     public static final int LEFT_CLIMBER = 6;
     
     public static final int INTAKE=5;
-
+    //need to fix this
+    public static final int INTAKERELEASE=99;
+    
     //Drive control port IDs
     public static final int XBOX_PORT = 0;
 

@@ -14,6 +14,7 @@ public class Intake extends SubsystemBase {
   
   //motor to run the intake wheels
   private WPI_TalonSRX intakeMain = new WPI_TalonSRX( INTAKE);
+  private WPI_TalonSRX intakeRelease = new WPI_TalonSRX(INTAKERELEASE);
 
   public Intake() {}
 
@@ -31,4 +32,14 @@ public class Intake extends SubsystemBase {
   {
       intakeMain.set(0);
   }
+ 
+  public void intakeRelease(XboxController xbox)
+  {
+      intakeRelease.set(0.1);
+  }
+  public void intakeReleaseStop(XboxController xbox)
+  {
+    intakeRelease.set(0);
+  }
+
 }
