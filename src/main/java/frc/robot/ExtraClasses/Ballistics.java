@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class Ballistics {
 
+
     //Input values
     public double destinationHeight;
     public double launcherHeight;
@@ -27,7 +28,7 @@ public class Ballistics {
     public final double g = 386.04;//acceleration due to gravity, in/s^2
 
     //Math-based values
-    public double targetHeight;
+    public double targetHeight; //change in heights. target height - launcher height.
     public double wheelCircumference;
     public double missileMaxSpeed;
 
@@ -43,7 +44,7 @@ public class Ballistics {
     
     public int minSpeed = 70;//percent
     public int maxSpeed = 100;//percent
-    public int argumentCount = 5;//distance, angle, speed, height, possibility (0 is false)
+    public int argumentCount = 5;//distance, angle, speed, height, possibility(is the shot possible) (0 is false)
 
     /* 2-d ballistics array
      * Structure:  each internal array is [distance, angle, speed, height, possibility of shot]
@@ -75,7 +76,7 @@ public class Ballistics {
 
         //Calculate missile max speed
         wheelCircumference = wheelDiameter * Math.PI;
-        missileMaxSpeed = maxSpeedRPM * wheelCircumference * wheelSlip / 60;//in/s
+        missileMaxSpeed = maxSpeedRPM * wheelCircumference * wheelSlip / 60;//in/s //the 60 is to convert RPM to RPS. wheel circumference converts RPS to in/s
 
         System.out.println("Target Height: " + targetHeight + ", Max Speed: " + missileMaxSpeed);
 
@@ -87,13 +88,13 @@ public class Ballistics {
     public double[][] generateBallisticsTable(){
 
         //Table to be filled and returned
-        double[][] table = new double[(maxDistance - minDistance)/distanceIncrement + 1][argumentCount];
+        double[][] table = new double[(maxDistance - minDistance)/distanceIncrement + 1][argumentCount]; //this makes a matrix of [distance, angle, speed, height, possibility(is the shot possible)] for each of the potential distance
 
         //Start iterating at hardcoded minimum distance
         double startDistance = minDistance;
       
         //Loop through the distances foot by foot
-        for(int i = 0; i < table.length; i++){
+        for(int i = 0; i < table.length; i++){ //length is number of rows. which is different distances
  
             //At each foot, calculate the optimal angle and speed
             double optimalAngle = 0;
