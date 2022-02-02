@@ -18,15 +18,21 @@ package frc.robot;
 
 public final class Constants {
     //Talon SRX and FX IDs (must be unique, may range from 0+)
+    //drivetrain motors
     public static final int LEFT_MASTER_F = 3;
     public static final int LEFT_SLAVE_F = 2;
     public static final int RIGHT_MASTER_F = 1;
     public static final int RIGHT_SLAVE_F = 4;
 
+    //climber motors
     public static final int RIGHT_CLIMBER = 7;
     public static final int LEFT_CLIMBER = 6;
     
+    //processor motors
     public static final int INTAKE=5;
+    public static final int INTAKERELEASE = 99;
+    public static final int FEEDER = 999;
+    public static final int SHOOTER = 10;
 
     //Drive control port IDs
     public static final int XBOX_PORT = 0;
