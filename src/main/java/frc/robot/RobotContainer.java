@@ -101,7 +101,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     
     //intake
-    intakeButton.whileHeld(intakeCommand);
+    
 
     //climber
     climberExtendButton.whileHeld(extendClimberCommand);
