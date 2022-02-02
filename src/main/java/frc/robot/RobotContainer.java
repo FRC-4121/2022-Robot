@@ -35,7 +35,7 @@ public class RobotContainer {
 
   //Subsystems
   private final Drivetrain drivetrain = new Drivetrain();
-  private final Processor intake = new Processor();
+  private final Intake intake = new Intake();
   private final Climber climber = new Climber();
   private final RightClimber rightClimber = new RightClimber();
   private final Shooter shooter = new Shooter();
@@ -54,7 +54,6 @@ public class RobotContainer {
 
   //Shooting
   private final ShootBall shooterCommand = new ShootBall(shooter, xbox);
-  
 
   //Buttons
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
@@ -63,14 +62,14 @@ public class RobotContainer {
   private final JoystickButton rightclimberExtendButton = new JoystickButton(xbox, xboxBButton);
   private final JoystickButton rightclimberRetractButton = new JoystickButton(xbox, xboxYButton);
   private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
-
+  
   //Driving
   private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
 
   
 
   // Processor
-  //private final RunIntake intakeCommand = new RunIntake(intake, xbox);
+  private final RunIntake intakeCommand = new RunIntake(intake, xbox);
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -98,10 +97,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings(){
+  private void configureButtonBindings() {
     
     //intake
-    
+    intakeButton.whileHeld(intakeCommand);
 
     //climber
     climberExtendButton.whileHeld(extendClimberCommand);

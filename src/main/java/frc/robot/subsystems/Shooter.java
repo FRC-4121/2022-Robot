@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterRun(){
-    shooterMotor.set(ControlMode.PercentOutput, -0.2);
+    shooterMotor.set(ControlMode.PercentOutput, -0.1);
   }
 
   @Override

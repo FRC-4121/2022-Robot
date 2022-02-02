@@ -32,7 +32,7 @@ public final class Constants {
     public static final int INTAKE=5;
     public static final int INTAKERELEASE = 99;
     public static final int FEEDER = 999;
-    public static final int SHOOTER = 999;
+    public static final int SHOOTER = 10;
 
     //Drive control port IDs
     public static final int XBOX_PORT = 0;
