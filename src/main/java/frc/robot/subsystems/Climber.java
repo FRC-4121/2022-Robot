@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import static frc.robot.Constants.DrivetrainConstants.*;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,8 +30,6 @@ public class Climber extends SubsystemBase {
         //SmartDashboard.putNumber("ClimbEncoder",0);
         masterClimberMotor.setSelectedSensorPosition(0);
     }
-
-
 
     //methods
     public void climbStop(XboxController xbox){

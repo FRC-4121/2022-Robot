@@ -13,11 +13,8 @@ import static frc.robot.Constants.DrivetrainConstants.*;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.DigitalInput;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-//import edu.wpi.first.wpilibj.LinearFilter;
-//import edu.wpi.first.wpilibj.MedianFilter;
+import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,8 +23,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
 
   private ADXRS450_Gyro gyro;
-  //private LinearFilter gyro_filter;
-  //private MedianFilter gyro_filter;
+  private MedianFilter gyro_filter;
 
   private WPI_TalonFX leftMasterFalcon;
   private WPI_TalonFX leftSlaveFalcon;
@@ -65,6 +61,8 @@ public class Drivetrain extends SubsystemBase {
     // Zero drivetrain encoders
     SmartDashboard.putNumber("Zero Encoders", 0);
     zeroEncoders();
+
+    gyro_filter = new MedianFilter(FILTER_WINDOW_SIZE);
   }
 
 
@@ -317,5 +315,13 @@ public class Drivetrain extends SubsystemBase {
     DIRECTION_MULTIPLIER *= -1;
 
   }
+
+  public double getGyroAngle(){
+
+    double correctedGyro = gyro_filter.calculate(gyro.getAngle() % 360.0);
+    return correctedGyro;
+
+  }
+
 }
 

@@ -1,97 +1,180 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
+import static frc.robot.Constants.DrivetrainConstants.*;
+
+import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.ExtraClasses.PIDControl;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
-//import frc.robot.extraClasses.PIDControl;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-public class AutoDrive extends Command {
 
-    double driveAngle;  //drive angle
-    double stopTime;  //timeout time
-    double gyroAngle;
-    double angleCorrection;
-    double robotAngle;      //angle of the robot with respect to robot front
-    double startTime;
-    double speedMultiplier;
-	
-	//PIDControl pidControl;
 
-	public Timer timer = new Timer();
-	
-	//Class constructor
-    public AutoDrive(double ang, double orientAng, double time, double speed) {
-    	
-    	//requires(Robot.Drivetrain);//how does this work
-    	
-    	//Set local variables
-        driveAngle = ang;
-        robotAngle = orientAng;
-        stopTime = time;
-        speedMultiplier = speed;
-    	    	
-    	//Set up PID control
-    	//pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
-    	
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class AutoDrive extends CommandBase {
+
+  /** Creates a new AutoDrive. */
+  private final Drivetrain drivetrain;
+  private double targetDriveDistance;
+  private double targetAngle;
+  private double direction;
+  private double stopTime;
+  private double currentGyroAngle = 0;
+  private double driveDirection;
+  private double driveSpeed;
+
+  private double angleCorrection, speedCorrection;
+  private double startTime;
+  private double distanceTraveled;
+
+  private double leftEncoderStart;
+  private double rightEncoderStart;
+  private double totalRotationsLeft = 0;
+  private double totalRotationsRight = 0;
+
+
+  private Timer timer = new Timer();
+  private PIDControl pidDriveAngle;
+  private PIDControl pidDriveDistance; 
+
+
+  public AutoDrive(Drivetrain drive, double dis, double ang, double dir, double time) {
+   
+    targetDriveDistance = dis;
+    targetAngle = ang;
+    direction = dir;
+    stopTime = time;
+    drivetrain = drive;
+
+   
+    
+    addRequirements(drivetrain); 
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+  
+    distanceTraveled = 0.0;
+    timer.start();
+    startTime = timer.get();
+
+    leftEncoderStart = drivetrain.getMasterLeftEncoderPosition();
+    rightEncoderStart = drivetrain.getMasterRightEncoderPosition();
+
+    angleCorrection = 0;
+    speedCorrection = 1;
+
+     //The constants for these need to be figured out
+     pidDriveAngle = new PIDControl(kP_DriveAngle, kI_DriveAngle, kD_DriveAngle);
+     pidDriveDistance = new PIDControl(kP_Straight, kI_Straight, kD_Straight);
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+
+    // Calculate angle correction based on gyro reading
+    currentGyroAngle = drivetrain.getGyroAngle();
+    angleCorrection = pidDriveAngle.run(currentGyroAngle, targetAngle);
+    // SmartDashboard.putNumber("AngleCor", angleCorrection);
+
+    // Calculate speed correction based on distance to target
+    totalRotationsRight = Math.abs((Math.abs(drivetrain.getMasterRightEncoderPosition()) - rightEncoderStart));
+    totalRotationsLeft = Math.abs((Math.abs(drivetrain.getMasterLeftEncoderPosition()) - leftEncoderStart));
+    distanceTraveled = (kWheelDiameter * Math.PI * (totalRotationsLeft + totalRotationsRight) / 2.0) / (DrivetrainConstants.kTalonFXPPR * kGearRatio);
+    speedCorrection = pidDriveDistance.run(distanceTraveled, targetDriveDistance);
+    SmartDashboard.putNumber("DrSpCorrection", speedCorrection);
+
+    //Check for overspeed correction
+    if(speedCorrection > 1){
+
+       speedCorrection = 1;
+
+    } else if (speedCorrection < -1) {
+
+      speedCorrection = -1;
+
     }
 
-    
-    // Called just before this Command runs the first time
-    protected void initialize() {
-        
-        if(stopTime != 0)
-        {
-            timer.start();
-            startTime= timer.get();
-        }
 
-        angleCorrection = 0;
-        
+    driveSpeed = direction * speedCorrection * kAutoShootDriveSpeed;
+
+    SmartDashboard.putNumber("DriveSpeed", driveSpeed);
+    // Enforce minimum speed
+    // if (Math.abs(driveSpeed) < kAutoDriveSpeedMin) {
+
+    //   angleCorrection = 0;
+    //   if (driveSpeed < 0){
+    //     driveSpeed = -kAutoDriveSpeedMin;
+    //   } else {
+    //     driveSpeed = kAutoDriveSpeedMin;
+    //   }
+    // }
+    SmartDashboard.putNumber("AngleCor", angleCorrection);
+
+    double leftSpeed = 0;
+    double rightSpeed = 0;
+    if (Math.abs(driveSpeed + angleCorrection) > 1){
+      if(driveSpeed + angleCorrection < 0) {
+        leftSpeed = -1;
+      } else {
+        leftSpeed = 1;
+      }
+    } else {
+      leftSpeed = driveSpeed + angleCorrection;
     }
 
-    
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-        
-        //write execute
-        //Drop the intake system and run it
-        //shoot ball
-        //Move back fully outside of the initial region
-        //Pick up a second ball, if you can't skip to third line
-        //Move even further to assure the bot is fully outside the region
-        //scoot closer to the goal and score in the lower goal
-        //if there's time left keep rotating until you find another ball.
-
-        //Plan to pick up second ball run AutoDriveToBall
-
+    if (Math.abs(driveSpeed - angleCorrection) > 1){
+      if(driveSpeed - angleCorrection < 0) {
+        rightSpeed = -1;
+      } else {
+        rightSpeed = 1;
+      }
+    } else {
+      rightSpeed = driveSpeed - angleCorrection;
     }
+    rightSpeed *= kAutoRightSpeedCorrection;
+    SmartDashboard.putNumber("LeftSpeed", leftSpeed);
+    SmartDashboard.putNumber("RightSpeed", rightSpeed);
 
+    // Run the drive
+    drivetrain.autoDrive(leftSpeed, rightSpeed);
+
+    double totalRotationsRight = Math.abs((drivetrain.getMasterRightEncoderPosition() - rightEncoderStart));
+    double totalRotationsLeft = Math.abs((drivetrain.getMasterLeftEncoderPosition() - leftEncoderStart));
+
+    distanceTraveled = (kWheelDiameter * Math.PI * (totalRotationsLeft + totalRotationsRight) / 2.0) / AUTO_ENCODER_REVOLUTION_FACTOR;
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+
+    drivetrain.stopDrive();
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
     
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        
-        //Initialize return flag
-    	boolean thereYet = false;
- 
-       //write a conditions to decide thereYet like master kill switch, or end of 15 seconds,etc.
-        
+    boolean thereYet = false;
+    double time = timer.get();
 
-        //Return flag
-        return thereYet;
-        
+    // Check distance against target
+    SmartDashboard.putNumber("Distance error", Math.abs(distanceTraveled - targetDriveDistance));
+    if (distanceTraveled >= targetDriveDistance) {
+        thereYet = true;
+    } else if (time - startTime >= stopTime) {
+        thereYet = true;
     }
     
-    // Called once after isFinished returns true
-    protected void end() {
 
-        //Stop the robot
-        
-        
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {}
-    
+    return thereYet;
+  }
 }

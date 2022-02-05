@@ -22,23 +22,28 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-// method to run tyhe motor for the intake wheels
-  public void runIntake()
+// method to run the motor for the intake wheels
+ 
+public void runIntake()
   {
-      intakeMain.set(-0.6);
+    intakeMain.set(-0.6);
   }
-//method to stop the motor for the intake wheels
+ 
+  //method to stop the motor for the intake wheels
   public void stopIntake()
   {
       intakeMain.set(0);
   }
- 
+ //method to start the motor for the intake release
   public void intakeRelease()
   {
+    
       intakeRelease.set(0.1);
   }
+  //method to stop the motor for the intake release 
   public void intakeReleaseStop()
   {
+    //sets motor speed to stop
     intakeRelease.set(0);
   }
 
