@@ -30,7 +30,7 @@ public class RobotContainer {
   
   //Driver controllers
   private final XboxController xbox = new XboxController(XBOX_PORT);
-  
+  private final Joystick launchpad = new Joystick(4);
   
 
   //Subsystems
@@ -55,7 +55,7 @@ public class RobotContainer {
   //Shooting
   private final ShootBall shooterCommand = new ShootBall(shooter, xbox);
 
-  //Buttons
+  //xboxButtons
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
   private final JoystickButton climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
   private final JoystickButton climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
@@ -63,6 +63,9 @@ public class RobotContainer {
   private final JoystickButton rightclimberRetractButton = new JoystickButton(xbox, xboxYButton);
   private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
   
+  //launchpad buttons/switches
+  private final JoystickButton intakeToggle = new JoystickButton(launchpad,LaunchPadButton1);
+
   //Driving
   private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
 
@@ -101,6 +104,8 @@ public class RobotContainer {
     
     //intake
     intakeButton.whileHeld(intakeCommand);
+    //for use with the launchpad 
+    //intakeToggle.whileHeld(intakeCommand);
 
     //climber
     climberExtendButton.whileHeld(extendClimberCommand);

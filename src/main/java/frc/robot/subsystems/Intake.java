@@ -23,21 +23,21 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 // method to run tyhe motor for the intake wheels
-  public void runIntake(XboxController xbox)
+  public void runIntake()
   {
       intakeMain.set(-0.6);
   }
 //method to stop the motor for the intake wheels
-  public void stopIntake(XboxController xbox)
+  public void stopIntake()
   {
       intakeMain.set(0);
   }
  
-  public void intakeRelease(XboxController xbox)
+  public void intakeRelease()
   {
       intakeRelease.set(0.1);
   }
-  public void intakeReleaseStop(XboxController xbox)
+  public void intakeReleaseStop()
   {
     intakeRelease.set(0);
   }

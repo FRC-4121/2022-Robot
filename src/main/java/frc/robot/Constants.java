@@ -45,6 +45,24 @@ public final class Constants {
     public static final int xboxLeftBumber = 5;
     public static final int xboxRightBumber = 6;
 
+    //LaunchPad button IDs
+    public static final int LaunchPadButton1= 7 ;
+    public static final int LaunchPadButton2=  17; 
+    public static final int LaunchPadButton3= 19 ;
+    public static final int LaunchPadButton4=  18;
+    public static final int LaunchPadSwitch1top=1  ;
+    public static final int LaunchPadSwitch1bottom=2  ;
+    public static final int LaunchPadSwitch2top=3  ;
+    public static final int LaunchPadSwitch2bottom=4  ;
+    public static final int LaunchPadSwitch3 = 5;
+    public static final int LaunchPadSwitch4 = 6;
+    public static final int LaunchPadSwitch5top=8  ;
+    public static final int LaunchPadSwitch5bottom=9  ;
+    public static final int LaunchPadSwitch6top=10  ;
+    public static final int LaunchPadSwitch6bottom=11 ;
+    public static final int LaunchPadSwitch7 = 12;
+    public static final int LaunchPadSwitch8 = 13;
+
     //Climber
     public static final int kPIDLoopIdxClimb = 0;
     public static final int kTimeoutMsClimb = 20;
