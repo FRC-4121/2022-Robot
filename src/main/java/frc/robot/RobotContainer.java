@@ -37,7 +37,6 @@ public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain();
   private final Intake intake = new Intake();
   private final Climber climber = new Climber();
-  private final RightClimber rightClimber = new RightClimber();
   private final Shooter shooter = new Shooter();
 
 
@@ -49,8 +48,6 @@ public class RobotContainer {
   private final ExtendClimber extendClimberCommand = new ExtendClimber(climber);
   private final RetractClimber retractClimberCommand = new RetractClimber(climber);
 
-  private final RightExtendClimber rightextendClimberCommand = new RightExtendClimber(rightClimber, xbox);
-  private final RightRetractClimber rightretractClimberCommand = new RightRetractClimber(rightClimber, xbox);
 
   //Shooting
   private final ShootBall shooterCommand = new ShootBall(shooter);
@@ -59,8 +56,6 @@ public class RobotContainer {
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
   private final JoystickButton climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
   private final JoystickButton climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
-  private final JoystickButton rightclimberExtendButton = new JoystickButton(xbox, xboxBButton);
-  private final JoystickButton rightclimberRetractButton = new JoystickButton(xbox, xboxYButton);
   private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
   
   //launchpad buttons/switches
@@ -110,8 +105,6 @@ public class RobotContainer {
     //climber
     climberExtendButton.whileHeld(extendClimberCommand);
     climberRetractButton.whileHeld(retractClimberCommand);
-    rightclimberExtendButton.whileHeld(rightextendClimberCommand);
-    rightclimberRetractButton.whileHeld(rightretractClimberCommand);
 
     //shooter
     shooterButton.whileHeld(shooterCommand);
