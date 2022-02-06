@@ -78,6 +78,7 @@ public final class Constants {
 
     //General
     public static int BallCount = 0;
+    public static boolean killAuto = false;
 
     public static class DrivetrainConstants {
 

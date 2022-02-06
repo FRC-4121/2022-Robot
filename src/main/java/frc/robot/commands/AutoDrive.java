@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import static frc.robot.Constants.DrivetrainConstants.*;
 
-import frc.robot.Constants.DrivetrainConstants;
+import static frc.robot.Constants.*;
 import frc.robot.ExtraClasses.PIDControl;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -169,11 +169,13 @@ public class AutoDrive extends CommandBase {
     // Check distance against target
     SmartDashboard.putNumber("Distance error", Math.abs(distanceTraveled - targetDriveDistance));
     if (distanceTraveled >= targetDriveDistance) {
-        thereYet = true;
+      thereYet = true;
     } else if (time - startTime >= stopTime) {
-        thereYet = true;
+      thereYet = true;
+    } else if (killAuto == true)
+    {
+      thereYet = true;
     }
-    
 
     return thereYet;
   }
