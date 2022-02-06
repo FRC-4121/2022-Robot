@@ -15,38 +15,82 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climber extends SubsystemBase {
     
-    //attributes
-    //motor controller
-     //private final WPI_TalonFX slaveClimberMotor = new WPI_TalonFX(RIGHT_CLIMBER);
-     private final WPI_TalonFX masterClimberMotor = new WPI_TalonFX(LEFT_CLIMBER);
-     private double motorDistance;
+   
+    //setting up the falcons for extending and retracting the climber
+    private final WPI_TalonFX leftClimberMotor = new WPI_TalonFX(LEFT_CLIMBER);
+    private final WPI_TalonFX rightClimberMotor = new WPI_TalonFX(RIGHT_CLIMBER);
+
+    //setting up the falcons for rotating the climber
+    private final WPI_TalonFX leftRotateMotor = new WPI_TalonFX(LEFT_ROTATE_CLIMBER);
+    private final WPI_TalonFX rightRotateMotor = new WPI_TalonFX(RIGHT_ROTATE_CLIMBER);
      
     
     //constructor
     public Climber(){
-        //slaveClimberMotor.follow(masterClimberMotor);
-        //slaveClimberMotor.setInverted(kMotorInvert);
-        masterClimberMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
-        //SmartDashboard.putNumber("ClimbEncoder",0);
-        masterClimberMotor.setSelectedSensorPosition(0);
+
+        //setting the encoders for the extend retract
+        leftClimberMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
+        rightClimberMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
+        leftClimberMotor.setSelectedSensorPosition(0);
+        rightClimberMotor.setSelectedSensorPosition(0);
+        
+        //setting the encoders for the rotaating motors
+        leftRotateMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
+        rightRotateMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
+        leftRotateMotor.setSelectedSensorPosition(0);
+        rightRotateMotor.setSelectedSensorPosition(0);
+
     }
 
     //methods
-    public void climbStop(XboxController xbox){
-        masterClimberMotor.set(ControlMode.PercentOutput, 0);
+    public void climbStop(){
+        leftClimberMotor.set(ControlMode.PercentOutput, 0);
+        rightClimberMotor.set(ControlMode.PercentOutput, 0);
     }
 
-    public void climbExtend(XboxController xbox){
-        masterClimberMotor.set(ControlMode.PercentOutput, -0.3);
-        SmartDashboard.putNumber("ClimbEncoder", masterClimberMotor.getSelectedSensorPosition());
+    public void climbExtend(double speed){
+        
+        //setting the speeds for extending
+        leftClimberMotor.set(ControlMode.PercentOutput, -speed);
+        rightClimberMotor.set(ControlMode.PercentOutput, speed);
     }
 
-    public void climbRetract(XboxController xbox){
-      while(masterClimberMotor.getSelectedSensorPosition() <= 0) //  the more negative the value is, the higher the hook of the climber. 0 should be when it is at rest position and fully retracted. This line is to make sure that the value doesn't go higher than the starting position
-      {
-        masterClimberMotor.set(ControlMode.PercentOutput, 0.3);
-        SmartDashboard.putNumber("ClimbEncoder", masterClimberMotor.getSelectedSensorPosition());
-      }
+    public void climbRetract(double speed){
+             
+        //setting the speeds for retracting
+        leftClimberMotor.set(ControlMode.PercentOutput, speed);
+        rightClimberMotor.set(ControlMode.PercentOutput, -speed);
+    }
+    
+    public void rotateClimbStop(){
+        leftRotateMotor.set(ControlMode.PercentOutput, 0);
+        rightRotateMotor.set(ControlMode.PercentOutput, 0);
+    }
+
+    public void rotateClimbOut(double speed){
+        
+        //setting the speeds for rotating outwards
+        leftClimberMotor.set(ControlMode.PercentOutput, -speed);
+        rightClimberMotor.set(ControlMode.PercentOutput, speed);
+    }
+
+    public void rotateClimbIn(double speed){
+             
+        //setting the speeds for rotating inwards
+        leftClimberMotor.set(ControlMode.PercentOutput, speed);
+        rightClimberMotor.set(ControlMode.PercentOutput, -speed);
+    }
+
+    // getting the current position of the left climber motor encoder
+    public double getLeftClimbEncoderPosition()
+    {
+        return leftClimberMotor.getSelectedSensorPosition();
+    }
+
+    // getting the current position of the right climber motor encoder
+    public double getRightCLimbEncoderPosition()
+    {
+        return rightClimberMotor.getSelectedSensorPosition();
     }
 
     @Override

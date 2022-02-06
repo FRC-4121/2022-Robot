@@ -139,7 +139,7 @@ public class AutoDrive extends CommandBase {
     } else {
       rightSpeed = driveSpeed - angleCorrection;
     }
-    rightSpeed *= kAutoRightSpeedCorrection;
+    rightSpeed *= kSpeedCorrection; //this may need to be used on the left drive motors
     SmartDashboard.putNumber("LeftSpeed", leftSpeed);
     SmartDashboard.putNumber("RightSpeed", rightSpeed);
 

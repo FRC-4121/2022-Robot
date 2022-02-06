@@ -30,7 +30,7 @@ public class RobotContainer {
   
   //Driver controllers
   private final XboxController xbox = new XboxController(XBOX_PORT);
-  private final Joystick launchpad = new Joystick(4);
+  private final Joystick launchpad = new Joystick(3);
   
 
   //Subsystems
@@ -46,14 +46,14 @@ public class RobotContainer {
   private final DriveWithJoysticks driveCommand = new DriveWithJoysticks(drivetrain, xbox);
 
   //Climbing
-  private final ExtendClimber extendClimberCommand = new ExtendClimber(climber, xbox);
-  private final RetractClimber retractClimberCommand = new RetractClimber(climber, xbox);
+  private final ExtendClimber extendClimberCommand = new ExtendClimber(climber);
+  private final RetractClimber retractClimberCommand = new RetractClimber(climber);
 
   private final RightExtendClimber rightextendClimberCommand = new RightExtendClimber(rightClimber, xbox);
   private final RightRetractClimber rightretractClimberCommand = new RightRetractClimber(rightClimber, xbox);
 
   //Shooting
-  private final ShootBall shooterCommand = new ShootBall(shooter, xbox);
+  private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //xboxButtons
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
@@ -72,7 +72,7 @@ public class RobotContainer {
   
 
   // Processor
-  private final RunIntake intakeCommand = new RunIntake(intake, xbox);
+  private final RunIntake intakeCommand = new RunIntake(intake);
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -123,7 +123,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new ExtendClimber(climber, xbox);
+    return new ExtendClimber(climber);
     // return new AutoGetAllBalls(drivetrain, pneumatics, process2, ntables, ballData, 2, 100);
     // return new AutoShootTimed(drivetrain, shooter, pneumatics, process2, turret, ntables, 60);
     // return new RunHoodToPos(turret, 240);

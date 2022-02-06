@@ -6,18 +6,15 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Intake mainIntake;
-  private XboxController xboxJoysticks;
 
 
-  public RunIntake(Intake intake, XboxController xbox){
+  public RunIntake(Intake intake){
     mainIntake = intake;
-    xboxJoysticks = xbox;
 
     addRequirements(intake);
   }

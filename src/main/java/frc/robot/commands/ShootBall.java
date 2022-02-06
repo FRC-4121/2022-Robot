@@ -5,19 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Shooter;
 
 public class ShootBall extends CommandBase {
   //attributes; variables
   private final Shooter shooter;
-  private XboxController xbox;
   
   
   /** Creates a new ShootBall. */
-  public ShootBall(Shooter subsystem, XboxController xboxJoysticks) {
+  public ShootBall(Shooter subsystem) {
     shooter = subsystem;
-    xbox = xboxJoysticks;
     addRequirements(subsystem);
   }
 

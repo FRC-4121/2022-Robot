@@ -27,11 +27,14 @@ public final class Constants {
     //climber motors
     public static final int RIGHT_CLIMBER = 7;
     public static final int LEFT_CLIMBER = 6;
+    public static final int RIGHT_ROTATE_CLIMBER = 998; // need to find
+    public static final int LEFT_ROTATE_CLIMBER = 997; // need to find
+
     
     //processor motors
     public static final int INTAKE=5;
     public static final int INTAKERELEASE = 99;
-    public static final int FEEDER = 999;
+    public static final int FEEDER = 999; // need to find
     public static final int SHOOTER = 10;
 
     //Drive control port IDs
@@ -62,13 +65,19 @@ public final class Constants {
     public static final int LaunchPadSwitch6bottom=11 ;
     public static final int LaunchPadSwitch7 = 12;
     public static final int LaunchPadSwitch8 = 13;
+    public static final int LaunchPadDial1 = 14; // low bit
+    public static final int LaunchPadDial2 = 15;
+    public static final int LaunchPadDial3 = 16; // high bit
 
     //Climber
     public static final int kPIDLoopIdxClimb = 0;
     public static final int kTimeoutMsClimb = 20;
     public static final int maxHeight = -135000; //TBD encoder raw sensor units (2048 in one rotation) for max height that climber should go
+    public static final double climberSpeed = 0.3;
+    public static final double rotateSpeed = 0.3;
 
-
+    //General
+    public static int BallCount = 0;
 
     public static class DrivetrainConstants {
 
@@ -79,7 +88,8 @@ public final class Constants {
         public static final double kWheelDiameter = 6.0;
         public static final double kLowGearSpeedCap = 0.8;//In case full speed draws excessive power, these are an emergency measure
         public static final double kHighGearSpeedCap = 1.0;
-        public static double kJoystickSpeedCorr = 0.55;
+        public static final double kJoystickSpeedCorr = 0.55;
+        public static final double kManualDriveSpeed = 0.75;
         public static final double kAutoDriveSpeed = .4;
         public static final double kAutoDriveSpeedMin = 0.25;
         public static final double kAutoShootDriveSpeed = 0.75;
@@ -101,7 +111,7 @@ public final class Constants {
         public static final double kI_DriveAngle = 0.0;
         public static final double kD_DriveAngle = 0.0004;
 
-        public static final double kAutoRightSpeedCorrection = 0.9;
+        public static final double kSpeedCorrection = 0.9; //this will be used to compensate for differnces in the drive motors
 
         //Filtering (for gyro)
         public static final int FILTER_WINDOW_SIZE = 150;
