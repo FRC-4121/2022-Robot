@@ -119,8 +119,8 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-    //not sure where to put this
     // killAutoButton.whenPressed(killAuto);
+    //killAutoButton.whenReleased(killAuto);
 
   }
 
