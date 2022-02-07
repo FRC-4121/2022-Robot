@@ -49,7 +49,7 @@ public class RobotContainer {
   private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //KillAuto Command
-  private final KillAutoCommand killAutoObject = new KillAutoCommand();
+  private final KillAutoCommand killAutoObject = new KillAutoCommand(); //
 
   // Intake
   private final RunIntake intakeCommand = new RunIntake(intake);
