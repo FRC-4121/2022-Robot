@@ -74,7 +74,7 @@ public class RobotContainer {
   private final JoystickButton processorButton = new JoystickButton(xbox, xboxAButton);
   
   //launchpad buttons/switches
-  private final JoystickButton killAutoButton = new JoystickButton(launchpad,LaunchPadButton4);
+  private final JoystickButton killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
   //Driving
   private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
   
