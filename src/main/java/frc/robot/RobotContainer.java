@@ -53,7 +53,7 @@ public class RobotContainer {
   private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //KillAuto Command
-  private final KillAutoCommand killAuto = new KillAutoCommand();
+  private final KillAutoCommandOld killAutoObject = new KillAutoCommandOld();
 
   //xboxButtons
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
@@ -110,8 +110,8 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-    // killAutoButton.whenPressed(killAuto);
-    //killAutoButton.whenReleased(killAuto);
+    killAutoButton.whenPressed((Command) killAutoObject);
+    killAutoButton.whenReleased((Command) killAutoObject);
 
   }
 
