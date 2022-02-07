@@ -33,7 +33,7 @@ public class Climber extends SubsystemBase {
         leftClimberMotor.setSelectedSensorPosition(0);
         rightClimberMotor.setSelectedSensorPosition(0);
         
-        //setting the encoders for the rotaating motors
+        //setting the encoders for the rotating motors
         leftRotateMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
         rightRotateMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, kPIDLoopIdxClimb, kTimeoutMsClimb);
         leftRotateMotor.setSelectedSensorPosition(0);

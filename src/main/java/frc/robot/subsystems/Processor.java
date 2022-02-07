@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
-import edu.wpi.first.wpilibj.XboxController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -31,13 +30,13 @@ public class Processor extends SubsystemBase {
   }
 
   // method to run tyhe motor for the processor wheels
-  public void runIntake()
+  public void runProcessor()
   {
     processor1.set(-0.6);
     processor2.set(-0.6);
   }
-//method to stop the motor for the intake wheels
-  public void stopIntake()
+//method to stop the motor for the processor wheels
+  public void stopProcessor()
   {
     processor1.set(0);
     processor2.set(0);
