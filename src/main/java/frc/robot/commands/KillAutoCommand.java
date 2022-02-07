@@ -1,54 +1,41 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 
-
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 
-public class KillAutoCommand extends Command {
+public class KillAutoCommand extends CommandBase {
+  /** Creates a new KillAutoCommand. */
   public KillAutoCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called just before this Command runs the first time
+  // Called when the command is initially scheduled.
   @Override
-  protected void initialize() {
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    if(killAuto == false){
+      killAuto = true;
+    } else
+    {
+      killAuto = false;
+    }
+     //if kill button clicked execute
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  // Called once the command ends or is interrupted.
   @Override
-  protected void execute() {
-  if(killAuto == false){
-    killAuto = true;
-  } else
-  {
-    killAuto = false;
-  }
-   //if kill button clicked execute
-  }
-  
+  public void end(boolean interrupted) {}
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Returns true when the command should end.
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return true;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
   }
 }
