@@ -41,16 +41,19 @@ public class RobotContainer {
 
 
   //Commands
-  //Driving
+  //Driving Commands
   private final DriveWithJoysticks driveCommand = new DriveWithJoysticks(drivetrain, xbox);
 
-  //Climbing
+  //Climbing Commands
   private final ExtendClimber extendClimberCommand = new ExtendClimber(climber);
   private final RetractClimber retractClimberCommand = new RetractClimber(climber);
 
 
-  //Shooting
+  //Shooting Commands
   private final ShootBall shooterCommand = new ShootBall(shooter);
+
+  //KillAuto Command
+  private final KillAutoCommand killAuto = new KillAutoCommand();
 
   //xboxButtons
   private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
@@ -59,11 +62,10 @@ public class RobotContainer {
   private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
   
   //launchpad buttons/switches
-  private final JoystickButton intakeToggle = new JoystickButton(launchpad,LaunchPadButton1);
-
+  private final JoystickButton killAutoButton = new JoystickButton(launchpad,LaunchPadButton4);
   //Driving
   private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
-
+  
   
 
   // Processor
@@ -99,8 +101,6 @@ public class RobotContainer {
     
     //intake
     intakeButton.whileHeld(intakeCommand);
-    //for use with the launchpad 
-    //intakeToggle.whileHeld(intakeCommand);
 
     //climber
     climberExtendButton.whileHeld(extendClimberCommand);
@@ -108,6 +108,11 @@ public class RobotContainer {
 
     //shooter
     shooterButton.whileHeld(shooterCommand);
+
+    //kill auto
+    //not sure where to put this
+    // killAutoButton.whenPressed(killAuto);
+
   }
 
  /**
