@@ -25,7 +25,12 @@ public class KillAutoCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  killAuto = true;
+  if(killAuto == false){
+    killAuto = true;
+  } else
+  {
+    killAuto = false;
+  }
    //if kill button clicked execute
   }
   
