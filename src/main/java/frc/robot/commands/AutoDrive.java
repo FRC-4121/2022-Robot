@@ -70,9 +70,9 @@ public class AutoDrive extends CommandBase {
     angleCorrection = 0;
     speedCorrection = 1;
 
-     //The constants for these need to be figured out
-     pidDriveAngle = new PIDControl(kP_DriveAngle, kI_DriveAngle, kD_DriveAngle);
-     pidDriveDistance = new PIDControl(kP_Straight, kI_Straight, kD_Straight);
+    //The constants for these need to be figured out
+    pidDriveAngle = new PIDControl(kP_DriveAngle, kI_DriveAngle, kD_DriveAngle);
+    pidDriveDistance = new PIDControl(kP_Straight, kI_Straight, kD_Straight);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -81,14 +81,14 @@ public class AutoDrive extends CommandBase {
 
     // Calculate angle correction based on gyro reading
     currentGyroAngle = drivetrain.getGyroAngle();
-    angleCorrection = pidDriveAngle.run(currentGyroAngle, targetAngle);
+    angleCorrection = pidDriveAngle.run(currentGyroAngle, targetAngle); //the angle that the robot needs to go from currentGyroAngle to targetAngle
     // SmartDashboard.putNumber("AngleCor", angleCorrection);
 
     // Calculate speed correction based on distance to target
     totalRotationsRight = Math.abs((Math.abs(drivetrain.getMasterRightEncoderPosition()) - rightEncoderStart));
     totalRotationsLeft = Math.abs((Math.abs(drivetrain.getMasterLeftEncoderPosition()) - leftEncoderStart));
     distanceTraveled = (kWheelDiameter * Math.PI * (totalRotationsLeft + totalRotationsRight) / 2.0) / (DrivetrainConstants.kTalonFXPPR * kGearRatio);
-    speedCorrection = pidDriveDistance.run(distanceTraveled, targetDriveDistance);
+    speedCorrection = pidDriveDistance.run(distanceTraveled, targetDriveDistance); //the closer, the slower robot move. The further, the faster the robot moves
     SmartDashboard.putNumber("DrSpCorrection", speedCorrection);
 
     //Check for overspeed correction
@@ -122,9 +122,9 @@ public class AutoDrive extends CommandBase {
     double rightSpeed = 0;
     if (Math.abs(driveSpeed + angleCorrection) > 1){
       if(driveSpeed + angleCorrection < 0) {
-        leftSpeed = -1;
+        leftSpeed = -1; //turning right
       } else {
-        leftSpeed = 1;
+        leftSpeed = 1; //turning left
       }
     } else {
       leftSpeed = driveSpeed + angleCorrection;

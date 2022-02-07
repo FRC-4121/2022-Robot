@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 //import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.ExtraClasses.NetworkTableQuerier;
+import static frc.robot.Constants.*;
 
 public class AutoDriveToBall extends CommandBase {
   
@@ -151,6 +152,10 @@ public class AutoDriveToBall extends CommandBase {
       thereYet = true;
     }
     else if (stopTime <= time - startTime){
+      thereYet = true;
+    }
+    else if (killAuto == true)
+    {
       thereYet = true;
     }
     SmartDashboard.putBoolean("Auto TY", thereYet);
