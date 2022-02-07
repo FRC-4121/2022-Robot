@@ -4,21 +4,18 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Processor;
 
-public class RunIntake extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+public class RunProcessor extends CommandBase {
+  //creating Processor subsystem
+  private final Processor processor;
   
-  //creating intake subsystem
-  private final Intake mainIntake;
-
-
-  public RunIntake(Intake intake){
-    mainIntake = intake;
-
-    addRequirements(intake);
+  /** Creates a new RunProcessor. */
+  public RunProcessor(Processor p){
+    // Use addRequirements() here to declare subsystem dependencies.
+    processor = p;
+    addRequirements(processor);
   }
 
   // Called when the command is initially scheduled.
@@ -28,13 +25,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-      mainIntake.runIntake();      
+    processor.runProcessor();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    mainIntake.stopIntake();
+  public void end(boolean interrupted){
+    processor.stopProcessor();
   }
 
   // Returns true when the command should end.
@@ -43,4 +40,3 @@ public class RunIntake extends CommandBase {
     return false;
   }
 }
-
