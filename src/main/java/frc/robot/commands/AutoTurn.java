@@ -5,11 +5,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.ExtraClasses.PIDControl;
+import static frc.robot.Constants.DrivetrainConstants.*;
 
 public class AutoTurn extends CommandBase {
+ 
+   // Declare class variables
+   double targetAngle;
+   double startTime;
+   double stopTime;
+   double angleError;
+   double angleCorrection;
+   double motorOutput;
+ 
+   PIDControl pidControl;
+
+   private Timer timer = new Timer();
+  
+   private final Drivetrain drivetrain;
+ 
   /** Creates a new AutoTurn. */
-  public AutoTurn() {
+  public AutoTurn(Drivetrain drive) {
+    drivetrain = drive;
+    
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drivetrain);
+
+    //Set up PID control
+    pidControl = new PIDControl(kP_Turn, kI_Turn, kD_Turn);
   }
 
   // Called when the command is initially scheduled.
