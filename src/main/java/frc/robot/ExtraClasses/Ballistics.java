@@ -206,6 +206,8 @@ public class Ballistics {
 
     public static void main(String[] args){
 
+        
+
         Ballistics ballistics = new Ballistics(98.25, 22.5, 5, 6050, 6, .25);
 
         System.out.println("-----------------------------------------");
