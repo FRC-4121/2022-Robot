@@ -28,6 +28,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Climber climber = new Climber();
   private final Shooter shooter = new Shooter();
+  private final Processor processor = new Processor();
 
 
 
@@ -48,10 +49,13 @@ public class RobotContainer {
   private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //KillAuto Command
-  private final KillAutoCommand killAuto = new KillAutoCommand();
+  private final KillAutoCommand killAutoObject = new KillAutoCommand();
 
-  // Processor
+  // Intake
   private final RunIntake intakeCommand = new RunIntake(intake);
+
+  //Processor
+  private final RunProcessor processorCommand = new RunProcessor(processor);
 
 
 
@@ -67,6 +71,7 @@ public class RobotContainer {
   private final JoystickButton climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
   private final JoystickButton climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
   private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
+  private final JoystickButton processorButton = new JoystickButton(xbox, xboxAButton);
   
   //launchpad buttons/switches
   private final JoystickButton killAutoButton = new JoystickButton(launchpad,LaunchPadButton4);
@@ -97,7 +102,7 @@ public class RobotContainer {
 
 
   //===METHODS,WHERE STUFF IS CONFIGURED===///
-  
+
 
   //For subsystem default commands (driving, etc.)
   private void configureDefaultCommands(){
@@ -119,8 +124,11 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-    // killAutoButton.whenPressed(killAuto);
-    //killAutoButton.whenReleased(killAuto);
+    killAutoButton.whenPressed(killAutoObject);
+    killAutoButton.whenReleased(killAutoObject);
+
+    //processor
+    processorButton.whileHeld(processorCommand);
 
   }
 
