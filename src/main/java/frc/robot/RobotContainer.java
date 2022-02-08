@@ -148,16 +148,16 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-<<<<<<< HEAD
+
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
-=======
+
     killAutoButton.whenPressed(killAutoObject);
     killAutoButton.whenReleased(killAutoObject);
 
     //processor
     processorButton.whileHeld(processorCommand);
->>>>>>> 59922203fd61229db95f5b476b2d298dfdd04b66
+
 
   }
 
