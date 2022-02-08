@@ -152,9 +152,6 @@ public class RobotContainer {
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
 
-    killAutoButton.whenPressed(killAutoObject);
-    killAutoButton.whenReleased(killAutoObject);
-
     //processor
     processorButton.whileHeld(processorCommand);
 
