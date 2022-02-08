@@ -136,7 +136,7 @@ public class RobotContainer {
   }
   
   private void configureButtonBindings() {
-    
+    if(testing){
     //intake
     intakeButton.whileHeld(intakeCommand);
 
@@ -154,7 +154,29 @@ public class RobotContainer {
 
     //processor
     processorButton.whileHeld(processorCommand);
+    }
 
+
+    
+    else{ //if not in test mode, change these values. 
+      //intake
+    intakeButton.whileHeld(intakeCommand);
+
+    //climber
+    climberExtendButton.whileHeld(extendClimberCommand);
+    climberRetractButton.whileHeld(retractClimberCommand);
+
+    //shooter
+    shooterButton.whileHeld(shooterCommand);
+
+    //kill auto
+
+    killAutoButton.whenPressed( killAutoObject);
+    killAutoButton.whenReleased( killAutoObject);
+
+    //processor
+    processorButton.whileHeld(processorCommand);
+    }
 
   }
 

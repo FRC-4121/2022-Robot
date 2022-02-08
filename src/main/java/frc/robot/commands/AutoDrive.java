@@ -81,7 +81,7 @@ public class AutoDrive extends CommandBase {
 
     // Calculate angle correction based on gyro reading
     currentGyroAngle = drivetrain.getGyroAngle();
-    angleCorrection = pidDriveAngle.run(currentGyroAngle, targetAngle); //the angle that the robot needs to go from currentGyroAngle to targetAngle
+    angleCorrection = pidDriveAngle.run(currentGyroAngle, targetAngle); //the speed that the robot rotates from currentGyroAngle to targetAngle between -1 to 1
     // SmartDashboard.putNumber("AngleCor", angleCorrection);
 
     // Calculate speed correction based on distance to target
@@ -121,17 +121,17 @@ public class AutoDrive extends CommandBase {
     double leftSpeed = 0;
     double rightSpeed = 0;
     if (Math.abs(driveSpeed + angleCorrection) > 1){
-      if(driveSpeed + angleCorrection < 0) {
-        leftSpeed = -1; //turning right
+      if(driveSpeed + angleCorrection < 0) {//do this because angleCorrection is sometimes over 1 so hard code it to -1 or 1
+        leftSpeed = -1;
       } else {
-        leftSpeed = 1; //turning left
+        leftSpeed = 1;
       }
     } else {
       leftSpeed = driveSpeed + angleCorrection;
     }
 
     if (Math.abs(driveSpeed - angleCorrection) > 1){
-      if(driveSpeed - angleCorrection < 0) {
+      if(driveSpeed - angleCorrection < 0) { //do this because angleCorrection is sometimes over 1 so hard code it to -1 or 1
         rightSpeed = -1;
       } else {
         rightSpeed = 1;
@@ -144,9 +144,9 @@ public class AutoDrive extends CommandBase {
     SmartDashboard.putNumber("RightSpeed", rightSpeed);
 
     // Run the drive
-    drivetrain.autoDrive(leftSpeed, rightSpeed);
+    drivetrain.autoDrive(leftSpeed, rightSpeed); //from which method does this come from.
 
-    double totalRotationsRight = Math.abs((drivetrain.getMasterRightEncoderPosition() - rightEncoderStart));
+    double totalRotationsRight = Math.abs((drivetrain.getMasterRightEncoderPosition() - rightEncoderStart)); //does getEncoderPosition return rotations or another unit?
     double totalRotationsLeft = Math.abs((drivetrain.getMasterLeftEncoderPosition() - leftEncoderStart));
 
     distanceTraveled = (kWheelDiameter * Math.PI * (totalRotationsLeft + totalRotationsRight) / 2.0) / AUTO_ENCODER_REVOLUTION_FACTOR;
