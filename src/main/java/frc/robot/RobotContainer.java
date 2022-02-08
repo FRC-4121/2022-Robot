@@ -49,7 +49,7 @@ public class RobotContainer {
   private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //KillAuto Command
-  private final KillAutoCommand killAutoObject = new KillAutoCommand();
+  private final KillAutoCommand killAutoObject = new KillAutoCommand(); //
 
   // Intake
   private final RunIntake intakeCommand = new RunIntake(intake);
@@ -63,31 +63,55 @@ public class RobotContainer {
 
 
 
-  //===BUTTONS===//
+  //===BUTTONS===// //They're being identified in RobotContainer
+
+  boolean testing = false; //change this depending on which u want
+
+
+
 
 
   //xboxButtons
-  private final JoystickButton intakeButton = new JoystickButton(xbox, 1);
-  private final JoystickButton climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
-  private final JoystickButton climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
-  private final JoystickButton shooterButton = new JoystickButton(xbox, xboxXButton);
-  private final JoystickButton processorButton = new JoystickButton(xbox, xboxAButton);
+  private final JoystickButton intakeButton;
+  private final JoystickButton climberExtendButton;
+  private final JoystickButton climberRetractButton;
+  private final JoystickButton shooterButton;
+  private final JoystickButton processorButton;
   
   //launchpad buttons/switches
-  private final JoystickButton killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
+  private final JoystickButton killAutoButton;
   //Driving
-  private final JoystickButton invertDirectionButton = new JoystickButton(xbox, 6);
-  
-  
-  
-
-
-
+  private final JoystickButton invertDirectionButton;
 
   
   //===CONSTRUCTOR===//
   public RobotContainer() {
     
+  if(testing) //using xbox controller to test
+  {
+    //xboxButtons
+    intakeButton = new JoystickButton(xbox, 1);
+    climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
+    climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
+    shooterButton = new JoystickButton(xbox, xboxXButton);
+    processorButton = new JoystickButton(xbox, xboxAButton);
+    
+    //launchpad buttons/switches
+     killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
+    //Driving
+     invertDirectionButton = new JoystickButton(xbox, 6);
+  }
+  else{ //using launchpad and xbox as if it's a real match
+     intakeButton = new JoystickButton(launchpad, 1);
+     climberExtendButton = new JoystickButton(launchpad, 1);
+     climberRetractButton = new JoystickButton(launchpad, 1); //FIX THE PARAMTERS DON't LET THEM BE 1
+     shooterButton = new JoystickButton(launchpad, 1);
+     processorButton = new JoystickButton(launchpad, 1);
+     killAutoButton = new JoystickButton(launchpad,LaunchPadButton1); 
+
+    //Driving
+     invertDirectionButton = new JoystickButton(xbox, 6);
+  }
     //Configure default commands
     configureDefaultCommands();
 
