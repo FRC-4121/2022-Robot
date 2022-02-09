@@ -1,5 +1,6 @@
 package frc.robot.ExtraClasses;
 
+
 /*
  * A class designed to calculate the optimal speed and angle for firing a relatively light missile 
  * to a set height from a given distance, using a single-flywheel mechanism.
