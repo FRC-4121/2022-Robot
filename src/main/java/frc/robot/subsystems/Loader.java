@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Loader extends SubsystemBase {
   
   //we have two motors facing each other but both running to feed in, so one of them must be in the oposite direction AKA negative.
-  private WPI_TalonSRX loader = new WPI_TalonSRX(8);
+  private WPI_TalonSRX loader = new WPI_TalonSRX(27);
   
 
   public Loader(){}
@@ -32,7 +32,7 @@ public class Loader extends SubsystemBase {
   // method to run tyhe motor for the processor wheels
   public void runProcessor()
   {
-    loader.set(0.4);
+    loader.set(0.2);
     
   }
 //method to stop the motor for the processor wheels
