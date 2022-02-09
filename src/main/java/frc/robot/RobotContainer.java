@@ -34,7 +34,6 @@ public class RobotContainer {
 
 
 
-
   //===COMMANDS===//
 
   //Driving Commands
@@ -57,7 +56,8 @@ public class RobotContainer {
   //Processor
   private final RunProcessor processorCommand = new RunProcessor(processor);
 
-
+  //loader
+  private final RunLoader runloader = new RunLoader(processor);
 
 
 
@@ -65,7 +65,7 @@ public class RobotContainer {
 
   //===BUTTONS===// //They're being identified in RobotContainer
 
-  boolean testing = false; //change this depending on which u want
+  boolean testing = true; //change this depending on which u want
 
 
 
@@ -82,6 +82,7 @@ public class RobotContainer {
   private final JoystickButton killAutoButton;
   //Driving
   private final JoystickButton invertDirectionButton;
+  private final JoystickButton loaderButton;
 
   
   //===CONSTRUCTOR===//
@@ -90,16 +91,19 @@ public class RobotContainer {
   if(testing) //using xbox controller to test
   {
     //xboxButtons
-    intakeButton = new JoystickButton(xbox, 1);
+    intakeButton = new JoystickButton(xbox, xboxAButton);
     climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
     climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
     shooterButton = new JoystickButton(xbox, xboxXButton);
     processorButton = new JoystickButton(xbox, xboxAButton);
     
     //launchpad buttons/switches
-     killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
+     killAutoButton = new JoystickButton(xbox,2); //ID 2 is the b button
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
+     
+     //loader
+     loaderButton = new JoystickButton(xbox, 4);
   }
   else{ //using launchpad and xbox as if it's a real match
      intakeButton = new JoystickButton(launchpad, 1);
@@ -111,6 +115,9 @@ public class RobotContainer {
 
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
+     //loader 
+     loaderButton = new JoystickButton(xbox, 4);
+
   }
     //Configure default commands
     configureDefaultCommands();
@@ -154,6 +161,9 @@ public class RobotContainer {
 
     //processor
     processorButton.whileHeld(processorCommand);
+    //loader
+    loaderButton.whileHeld(runloader);
+
     }
 
 
@@ -176,6 +186,9 @@ public class RobotContainer {
 
     //processor
     processorButton.whileHeld(processorCommand);
+    //loader
+    loaderButton.whileHeld(runloader);
+
     }
 
   }
