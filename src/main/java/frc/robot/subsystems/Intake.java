@@ -37,7 +37,6 @@ public void runIntake()
  //method to start the motor for the intake release
   public void intakeRelease()
   {
-    
       intakeRelease.set(0.1);
   }
   //method to stop the motor for the intake release 
