@@ -11,14 +11,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-public class Processor extends SubsystemBase {
+public class Loader extends SubsystemBase {
   
   //we have two motors facing each other but both running to feed in, so one of them must be in the oposite direction AKA negative.
-  private WPI_TalonSRX processor1 = new WPI_TalonSRX(7);
-  private WPI_TalonSRX processor2 = new WPI_TalonSRX(8);
+  private WPI_TalonSRX loader = new WPI_TalonSRX(8);
   
 
-  public Processor(){}
+  public Loader(){}
 
   @Override
   public void periodic() {
@@ -33,15 +32,13 @@ public class Processor extends SubsystemBase {
   // method to run tyhe motor for the processor wheels
   public void runProcessor()
   {
-    processor1.set(-0.4);
-    processor2.set(0.4);
+    loader.set(0.4);
     
   }
 //method to stop the motor for the processor wheels
   public void stopProcessor()
   {
-    processor1.set(0);
-    processor2.set(0);
+    loader.set(0);
     
   }
  
