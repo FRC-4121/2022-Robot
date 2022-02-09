@@ -5,8 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.Intake;
-import frc.robot.commands.DropIntake;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
+import frc.robot.ExtraClasses.NetworkTableQuerier;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,12 +15,13 @@ import frc.robot.commands.DropIntake;
 public class AutoGroup1 extends SequentialCommandGroup {
 
   /** Creates a new AutoGroup1. */
-  public AutoGroup1(Intake intake) {
+  public AutoGroup1(Intake intake, Shooter shoot, Drivetrain drive, NetworkTableQuerier table) {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands( new DropIntake(intake)); // we need to add commands in this for evrerything we do in auto
+    addCommands( new DropIntake(intake), new ShootBall(shoot), new DriveandPick(drive,intake,table), new AutoDrive(drive,12, 0, -1, 3), new ShootBall(shoot)); // we need to add commands in this for evrerything we do in auto
     //to add:
     //drop intake, shoot ball, autodrive to ball, pickup ball. 
-  }
+  
+}
 }

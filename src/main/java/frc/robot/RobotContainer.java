@@ -80,6 +80,10 @@ public class RobotContainer {
   
   //launchpad buttons/switches
   private final JoystickButton killAutoButton;
+  private final JoystickButton AutoPos1;
+  private final JoystickButton AutoPos2;
+  private final JoystickButton AutoPos3;
+
   //Driving
   private final JoystickButton invertDirectionButton;
 
@@ -95,9 +99,7 @@ public class RobotContainer {
     climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
     shooterButton = new JoystickButton(xbox, xboxXButton);
     processorButton = new JoystickButton(xbox, xboxAButton);
-    
-    //launchpad buttons/switches
-     killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
+
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
   }
@@ -106,12 +108,18 @@ public class RobotContainer {
      climberExtendButton = new JoystickButton(launchpad, 1);
      climberRetractButton = new JoystickButton(launchpad, 1); //FIX THE PARAMTERS DON't LET THEM BE 1
      shooterButton = new JoystickButton(launchpad, 1);
-     processorButton = new JoystickButton(launchpad, 1);
-     killAutoButton = new JoystickButton(launchpad,LaunchPadButton1); 
+     processorButton = new JoystickButton(launchpad, 1); 
 
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
   }
+
+    //launchpad buttons/switches
+    killAutoButton = new JoystickButton(launchpad,LaunchPadButton1);
+    AutoPos1 = new JoystickButton(launchpad,LaunchPadDial1);
+    AutoPos2 = new JoystickButton(launchpad,LaunchPadDial2);
+    AutoPos3 = new JoystickButton(launchpad,LaunchPadDial3);
+
     //Configure default commands
     configureDefaultCommands();
 
