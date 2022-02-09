@@ -19,5 +19,7 @@ public class AutoGroup1 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands( new DropIntake(intake)); // we need to add commands in this for evrerything we do in auto
+    //to add:
+    //drop intake, shoot ball, autodrive to ball, pickup ball. 
   }
 }
