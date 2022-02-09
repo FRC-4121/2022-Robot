@@ -5,16 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Loader;
+import frc.robot.subsystems.Processor;
 
 public class RunLoader extends CommandBase {
   //creating Processor subsystem
-  private final Loader loader;
+  private final Processor loader;
   
   /** Creates a new RunProcessor. */
-  public RunLoader(Loader p){
+  public RunLoader(Processor load){
     // Use addRequirements() here to declare subsystem dependencies.
-    loader = p;
+    loader = load;
     addRequirements(loader);
   }
 
@@ -25,13 +25,13 @@ public class RunLoader extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    loader.runProcessor();
+    loader.runLoader();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted){
-    loader.stopProcessor();
+    loader.stopLoader();
   }
 
   // Returns true when the command should end.
