@@ -35,6 +35,13 @@ public class Shooter extends SubsystemBase {
     //processorMotor.set(ControlMode.PercentOutput, -0.2);
   } 
 
+  public void shooterRun(int percent){
+    shooterMotor.set(ControlMode.PercentOutput, percent/100.0);
+    //~30 percent for low goal
+    //~50 percent for high goal
+    //processorMotor.set(ControlMode.PercentOutput, -0.2);
+  } 
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

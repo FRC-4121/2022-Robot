@@ -12,7 +12,6 @@ import static frc.robot.Constants.DrivetrainConstants.*;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.ExtraClasses.NetworkTableQuerier;
 import static frc.robot.Constants.*;

@@ -20,7 +20,7 @@ public class AutoDrive extends CommandBase {
 
   /** Creates a new AutoDrive. */
   private final Drivetrain drivetrain;
-  private double targetDriveDistance;
+  private double targetDriveDistance; //inches
   private double targetAngle;
   private double direction;
   private double stopTime;
@@ -42,7 +42,7 @@ public class AutoDrive extends CommandBase {
   private PIDControl pidDriveAngle;
   private PIDControl pidDriveDistance; 
 
-
+//distance is in inches
   public AutoDrive(Drivetrain drive, double dis, double ang, double dir, double time) {
    
     targetDriveDistance = dis;
