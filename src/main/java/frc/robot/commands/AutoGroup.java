@@ -12,10 +12,10 @@ import frc.robot.ExtraClasses.NetworkTableQuerier;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoGroup1 extends SequentialCommandGroup {
+public class AutoGroup extends SequentialCommandGroup {
 
   /** Creates a new AutoGroup1. */
-  public AutoGroup1(Intake intake, Shooter shoot, Drivetrain drive, NetworkTableQuerier table) {
+  public AutoGroup(Intake intake, Shooter shoot, Drivetrain drive, NetworkTableQuerier table) {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
