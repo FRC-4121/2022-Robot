@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.ExtraClasses.Ballistics;
 
 
 
@@ -88,6 +89,19 @@ public class RobotContainer {
   private final JoystickButton invertDirectionButton;
   private final JoystickButton loaderButton;
 
+  //Ballistics
+  /*
+     *  targetH: The height, in inches, of the desired target above the ground
+     *  launchH: The height, in inches, of the launcher release point above the ground
+     *  tolerance: A additive factor, in inches, that widens the range to target around the target height 
+     *  maxRPM: The maximum speed, in rotations per minute, of the flywheel
+     *  wheelD: The diameter, in inches, of the flywheel
+     *  slip: The percent of wheel speed that is converted to linear speed of the missile (due to the single-wheel design, much is lost as rotational speed)
+     */
+  //                     Parameters: target height(~50in), launch height(~40in), tolerance (idk~20in), maxRPM(idk needs testing), wheel diameter (~5.8 in), slip(~.1), 
+  public final Ballistics ballistic = new Ballistics(50,40,20,5050,5.8,.1); 
+  private final double distance = 50;//in this is temporary value
+  public final double[] tableQuery = ballistic.queryBallisticsTable(distance);
   
   //===CONSTRUCTOR===//
   public RobotContainer() {
