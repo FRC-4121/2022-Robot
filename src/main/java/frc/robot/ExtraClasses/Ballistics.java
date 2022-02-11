@@ -14,6 +14,13 @@ import static java.lang.Math.*;
 
 import java.util.Scanner;
 
+//Elia File out
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+// Elia
+
 public class Ballistics {
 
 
@@ -146,7 +153,8 @@ public class Ballistics {
 
     //Input distance in feet, angle in degrees, speed in percent; output height in inches
     public double calculateHeight(double distance, double angle, double speed){
-    
+        //this equation looks like the one from @Link:https://byjus.com/trajectory-formula/#:~:text=Trajectory%20formula%20is%20given%20by%20y%20%3D%20xtan%CE%B8%E2%88%92,2%20%CE%B8%20Where%2C%20y%20is%20the%20horizontal%20component%2C
+        
         //Derived from parametric equations of t based on basic trajectories.  Does not account for air resistance; this should be accounted for in the 'slip factor'
         double height = tan(toRadians(angle)) * distance - 0.5 * g * pow(distance / (cos(toRadians(angle)) * missileMaxSpeed * speed), 2);
 
@@ -210,6 +218,40 @@ public class Ballistics {
         
 
         Ballistics ballistics = new Ballistics(98.25, 22.5, 5, 6050, 6, .25);
+
+        //elia
+        try {
+            
+            double[] [] table = ballistics.generateBallisticsTable(); 
+
+            File file = new File("C:/Users/113281/Desktop/2022-Robot/src/main/java/frc/robot/ExtraClasses/outputTable.txt");
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("[distance\t angle\t speed\t height\t possibility] \n");
+            for (double i = 0; i< table.length/5; i++ )
+            {
+                for(int j = 0; j<5;j++)
+                bw.write(" \t " + Math.round(table[(int) i][j]) + " ");
+                bw.write("\n");
+            }
+            bw.close();
+
+            System.out.println("Done");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //elia
+
+
+
+
 
         System.out.println("-----------------------------------------");
         System.out.print("4121 Ballistics Program\n");
