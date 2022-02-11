@@ -51,10 +51,10 @@ public class DropIntake extends CommandBase {
     boolean thereYet = false;
 
     if (false /* if encoder value reached bottom*/ ) {
-      thereYet = true;
-    } else if (time - startTime >= stopTime) {
+     if (time - startTime >= stopTime) {
       thereYet = true;
     } 
+  }
 
     return thereYet;
   }
