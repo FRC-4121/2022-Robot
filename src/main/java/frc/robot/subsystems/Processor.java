@@ -36,8 +36,8 @@ public class Processor extends SubsystemBase {
   // method to run tyhe motor for the processor wheels
   public void runProcessor()
   {
-    processor1.set(-0.4);
-    processor2.set(0.4);
+    processor1.set(-0.2);
+    processor2.set(0.2);
     
   }
 //method to stop the motor for the processor wheels
