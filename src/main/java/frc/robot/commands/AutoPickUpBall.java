@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.DrivetrainConstants.*;
+import static frc.robot.Constants.*;
 import frc.robot.ExtraClasses.PIDControl;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,8 +23,6 @@ public class AutoPickUpBall extends CommandBase {
    private final Processor processor;
    private final Intake intake;
    private final NetworkTableQuerier ntables;
- 
-   private int ballCount;
  
    private boolean endRun;
    private boolean executeTurn;
@@ -84,7 +83,6 @@ public class AutoPickUpBall extends CommandBase {
    direction = -1;
    angleCorrection = 0;
    speedCorrection = 1;
-   ballCount = 0;
    targetGyroAngle = 0;
    distanceTraveled = 0;
    totalDistance = 0;
@@ -174,7 +172,7 @@ public class AutoPickUpBall extends CommandBase {
    SmartDashboard.putBoolean("ExecuteTurn", executeTurn);
    SmartDashboard.putBoolean("HoldAngle", endRun);
    SmartDashboard.putBoolean("EndRun", endRun);
-   SmartDashboard.putNumber("Ball Count", ballCount);
+   SmartDashboard.putNumber("Ball Count", ballsOnBoard);
    SmartDashboard.putNumber("Angle Correction", angleCorrection);
    SmartDashboard.putNumber("Speed Correction", speedCorrection);
    SmartDashboard.putNumber("Total Distance", totalDistance);
@@ -249,7 +247,7 @@ public class AutoPickUpBall extends CommandBase {
          //ballCount++;
 
          // Check if we have picked up last ball
-         //if (ballCount == 3) {
+         //if (ballsOnBoard == 2) {
 
            // Move to ending the run
            //endRun = true;
