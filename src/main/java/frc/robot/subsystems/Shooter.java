@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterRun(){
-    shooterMotor.set(ControlMode.PercentOutput, -0.30);
+    shooterMotor.set(ControlMode.PercentOutput, -0.3);
     //~30 percent for low goal
     //~50 percent for high goal
     //processorMotor.set(ControlMode.PercentOutput, -0.2);

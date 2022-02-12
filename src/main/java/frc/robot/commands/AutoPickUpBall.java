@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.DrivetrainConstants.*;
+import static frc.robot.Constants.*;
 import frc.robot.ExtraClasses.PIDControl;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,8 +23,6 @@ public class AutoPickUpBall extends CommandBase {
    private final Processor processor;
    private final Intake intake;
    private final NetworkTableQuerier ntables;
- 
-   private int ballCount;
  
    private boolean endRun;
    private boolean executeTurn;
@@ -59,10 +58,10 @@ public class AutoPickUpBall extends CommandBase {
     // Set class variables
     drivetrain = drive;
     processor = process;
+    intake = in;
     ntables = table;
     angleDeadband = deadband;
     stopTime = time;
-    intake = in;
 
     // Add subsystem requirements
     addRequirements(drivetrain, intake, processor);
@@ -84,7 +83,6 @@ public class AutoPickUpBall extends CommandBase {
    direction = -1;
    angleCorrection = 0;
    speedCorrection = 1;
-   ballCount = 0;
    targetGyroAngle = 0;
    distanceTraveled = 0;
    totalDistance = 0;
@@ -124,7 +122,6 @@ public class AutoPickUpBall extends CommandBase {
      ballOffset = ntables.getVisionDouble("BallOffset0");
 
 
-
      // Check if we are close enough and centered enough to hold the angle
      if (holdAngle == false) {
 
@@ -135,16 +132,15 @@ public class AutoPickUpBall extends CommandBase {
 
        }
  
-     }
-   
-     // Calculate angle correction for driving
-     if (holdAngle == false) {
-
+     } else if (holdAngle == false) {
+       
+       // Calculate angle correction for driving
        angleCorrection = pidAngle.run(ballOffset, 0);
 
      }
      else {
 
+       // Calculate angle correction for driving
        angleCorrection = pidAngle.run(currentGyroAngle, targetGyroAngle);
 
      }
@@ -174,7 +170,7 @@ public class AutoPickUpBall extends CommandBase {
    SmartDashboard.putBoolean("ExecuteTurn", executeTurn);
    SmartDashboard.putBoolean("HoldAngle", endRun);
    SmartDashboard.putBoolean("EndRun", endRun);
-   SmartDashboard.putNumber("Ball Count", ballCount);
+   SmartDashboard.putNumber("Ball Count", ballsOnBoard);
    SmartDashboard.putNumber("Angle Correction", angleCorrection);
    SmartDashboard.putNumber("Speed Correction", speedCorrection);
    SmartDashboard.putNumber("Total Distance", totalDistance);
@@ -182,7 +178,7 @@ public class AutoPickUpBall extends CommandBase {
    
    //Run the processor and intake
    processor.runProcessor();
-   intake.runIntake();
+   intake.runIntake(); 
 
    //Drive based on speed and angle corrections determined within the sequence
    //driving now moved down here, logic tree should just determine the corrections :)
@@ -249,7 +245,7 @@ public class AutoPickUpBall extends CommandBase {
          //ballCount++;
 
          // Check if we have picked up last ball
-         //if (ballCount == 3) {
+         //if (ballsOnBoard == 2) {
 
            // Move to ending the run
            //endRun = true;

@@ -51,7 +51,7 @@ public class RobotContainer {
   private final KillAutoCommand killAutoObject = new KillAutoCommand(); 
 
   // Intake
-  private final RunIntake intakeCommand = new RunIntake(intake);
+  private final PickUpBall intakeCommand = new PickUpBall(intake, processor);
 
   //Processor
   private final RunProcessor processorCommand = new RunProcessor(processor);
@@ -63,12 +63,7 @@ public class RobotContainer {
 
 
 
-  //===BUTTONS===// //They're being identified in RobotContainer
-
-  boolean testing = true; //change this depending on which u want
-
-
-
+  //===BUTTONS===// //They're being initialized in RobotContainer
 
 
   //xboxButtons
@@ -88,7 +83,9 @@ public class RobotContainer {
   private final JoystickButton invertDirectionButton;
   private final JoystickButton loaderButton;
 
-  
+  //testing
+  private boolean testing = true; //true for xbox, false for launchpad
+
   //===CONSTRUCTOR===//
   public RobotContainer() {
     
@@ -98,26 +95,25 @@ public class RobotContainer {
     intakeButton = new JoystickButton(xbox, xboxAButton);
     climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
     climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
-    shooterButton = new JoystickButton(xbox, xboxXButton);
-    processorButton = new JoystickButton(xbox, xboxAButton);
-    
+    shooterButton = new JoystickButton(xbox, xboxAButton);
+    processorButton = new JoystickButton(xbox, xboxLeftBumber);
+    loaderButton = new JoystickButton(xbox, xboxRightBumber);
+
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
      
-     //loader
-     loaderButton = new JoystickButton(xbox, 4);
   }
   else{ //using launchpad and xbox as if it's a real match
      intakeButton = new JoystickButton(launchpad, 1);
      climberExtendButton = new JoystickButton(launchpad, 1);
-     climberRetractButton = new JoystickButton(launchpad, 1); //FIX THE PARAMTERS DON't LET THEM BE 1
+     climberRetractButton = new JoystickButton(launchpad, 1); //get Id's from constants
      shooterButton = new JoystickButton(launchpad, 1);
      processorButton = new JoystickButton(launchpad, 1); 
 
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
      //loader 
-     loaderButton = new JoystickButton(xbox, 4);
+     loaderButton = new JoystickButton(xbox, xboxYButton);
 
   }
 
@@ -151,7 +147,7 @@ public class RobotContainer {
   }
   
   private void configureButtonBindings() {
-    if(testing){
+    if(testing){ //all xbox buttons
     //intake
     intakeButton.whileHeld(intakeCommand);
 
@@ -163,20 +159,17 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
 
     //processor
     processorButton.whileHeld(processorCommand);
+
     //loader
     loaderButton.whileHeld(runloader);
 
     }
-
-
-    
-    else{ //if not in test mode, change these values. 
+    else{ //launchpad 
       //intake
     intakeButton.whileHeld(intakeCommand);
 
@@ -188,18 +181,18 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
 
     //processor
     processorButton.whileHeld(processorCommand);
+
     //loader
     loaderButton.whileHeld(runloader);
-
     }
-
   }
+
+   
 
   
 
