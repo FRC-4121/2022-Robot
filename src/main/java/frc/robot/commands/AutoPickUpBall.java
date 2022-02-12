@@ -58,10 +58,10 @@ public class AutoPickUpBall extends CommandBase {
     // Set class variables
     drivetrain = drive;
     processor = process;
+    intake = in;
     ntables = table;
     angleDeadband = deadband;
     stopTime = time;
-    intake = in;
 
     // Add subsystem requirements
     addRequirements(drivetrain, intake, processor);
@@ -122,7 +122,6 @@ public class AutoPickUpBall extends CommandBase {
      ballOffset = ntables.getVisionDouble("BallOffset0");
 
 
-
      // Check if we are close enough and centered enough to hold the angle
      if (holdAngle == false) {
 
@@ -133,16 +132,15 @@ public class AutoPickUpBall extends CommandBase {
 
        }
  
-     }
-   
-     // Calculate angle correction for driving
-     if (holdAngle == false) {
-
+     } else if (holdAngle == false) {
+       
+       // Calculate angle correction for driving
        angleCorrection = pidAngle.run(ballOffset, 0);
 
      }
      else {
 
+       // Calculate angle correction for driving
        angleCorrection = pidAngle.run(currentGyroAngle, targetGyroAngle);
 
      }
@@ -180,7 +178,7 @@ public class AutoPickUpBall extends CommandBase {
    
    //Run the processor and intake
    processor.runProcessor();
-   intake.runIntake();
+   intake.runIntake(); 
 
    //Drive based on speed and angle corrections determined within the sequence
    //driving now moved down here, logic tree should just determine the corrections :)
