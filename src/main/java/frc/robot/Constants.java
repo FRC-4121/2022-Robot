@@ -34,8 +34,10 @@ public final class Constants {
     //processor motors
     public static final int INTAKE=5;
     public static final int INTAKERELEASE = 99;
-    public static final int FEEDER = 999; // need to find
+    public static final int LOADER = 27; // need to find
     public static final int SHOOTER = 10;
+    public static final int PROCESSOR_1 = 7;
+    public static final int PROCESSOR_2 = 8;
 
     //Drive control port IDs
     public static final int XBOX_PORT = 0;
@@ -79,7 +81,7 @@ public final class Constants {
     //General
     public static int BallCount = 0;
     public static boolean killAuto = false;
-    public int ballsOnBoard = 0;
+    public static int ballsOnBoard = 0;
 
     public static class DrivetrainConstants {
 

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.ExtraClasses.Ballistics;
 
 
 
@@ -49,10 +48,10 @@ public class RobotContainer {
   private final ShootBall shooterCommand = new ShootBall(shooter);
 
   //KillAuto Command
-  private final KillAutoCommand killAutoObject = new KillAutoCommand(); //
+  private final KillAutoCommand killAutoObject = new KillAutoCommand(); 
 
   // Intake
-  private final RunIntake intakeCommand = new RunIntake(intake);
+  private final PickUpBall intakeCommand = new PickUpBall(intake, processor);
 
   //Processor
   private final RunProcessor processorCommand = new RunProcessor(processor);
@@ -64,12 +63,7 @@ public class RobotContainer {
 
 
 
-  //===BUTTONS===// //They're being identified in RobotContainer
-
-  boolean testing = true; //change this depending on which u want
-
-
-
+  //===BUTTONS===// //They're being initialized in RobotContainer
 
 
   //xboxButtons
@@ -89,21 +83,9 @@ public class RobotContainer {
   private final JoystickButton invertDirectionButton;
   private final JoystickButton loaderButton;
 
-  //Ballistics
-  private final double distance = 50;//in this is temporary value, use getDistance to Goal or something with sensor.
-  /*
-     *  targetH: The height, in inches, of the desired target above the ground
-     *  launchH: The height, in inches, of the launcher release point above the ground
-     *  tolerance: A additive factor, in inches, that widens the range to target around the target height 
-     *  maxRPM: The maximum speed, in rotations per minute, of the flywheel
-     *  wheelD: The diameter, in inches, of the flywheel
-     *  slip: The percent of wheel speed that is converted to linear speed of the missile (due to the single-wheel design, much is lost as rotational speed)
-     */
-  //                     Parameters: target height(~50in and ~110in), launch height(~40in), tolerance (idk~20in), maxRPM(idk needs testing), wheel diameter (~5.8 in), slip(~.1), 
-  public final Ballistics ballisticLow = new Ballistics(50,40,20,5050,5.8,.1); 
-  public final Ballistics ballisticHigh = new Ballistics(110,40,20,5050,5.8,.1); 
-  public final double[] tableQueryLow = ballisticLow.queryBallisticsTable(distance);
-  public final double[] tableQueryHigh = ballisticHigh.queryBallisticsTable(distance);
+  //testing
+  private boolean testing = true; //true for xbox, false for launchpad
+
   //===CONSTRUCTOR===//
   public RobotContainer() {
     
@@ -113,26 +95,25 @@ public class RobotContainer {
     intakeButton = new JoystickButton(xbox, xboxAButton);
     climberExtendButton = new JoystickButton(xbox, xboxLeftBumber);
     climberRetractButton = new JoystickButton(xbox, xboxRightBumber);
-    shooterButton = new JoystickButton(xbox, xboxXButton);
-    processorButton = new JoystickButton(xbox, xboxAButton);
-    
+    shooterButton = new JoystickButton(xbox, xboxAButton);
+    processorButton = new JoystickButton(xbox, xboxLeftBumber);
+    loaderButton = new JoystickButton(xbox, xboxRightBumber);
+
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
      
-     //loader
-     loaderButton = new JoystickButton(xbox, 4);
   }
   else{ //using launchpad and xbox as if it's a real match
      intakeButton = new JoystickButton(launchpad, 1);
      climberExtendButton = new JoystickButton(launchpad, 1);
-     climberRetractButton = new JoystickButton(launchpad, 1); //FIX THE PARAMTERS DON't LET THEM BE 1
+     climberRetractButton = new JoystickButton(launchpad, 1); //get Id's from constants
      shooterButton = new JoystickButton(launchpad, 1);
      processorButton = new JoystickButton(launchpad, 1); 
 
     //Driving
      invertDirectionButton = new JoystickButton(xbox, 6);
      //loader 
-     loaderButton = new JoystickButton(xbox, 4);
+     loaderButton = new JoystickButton(xbox, xboxYButton);
 
   }
 
@@ -166,7 +147,7 @@ public class RobotContainer {
   }
   
   private void configureButtonBindings() {
-    if(testing){
+    if(testing){ //all xbox buttons
     //intake
     intakeButton.whileHeld(intakeCommand);
 
@@ -178,20 +159,17 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
 
     //processor
     processorButton.whileHeld(processorCommand);
+
     //loader
     loaderButton.whileHeld(runloader);
 
     }
-
-
-    
-    else{ //if not in test mode, change these values. 
+    else{ //launchpad 
       //intake
     intakeButton.whileHeld(intakeCommand);
 
@@ -203,18 +181,18 @@ public class RobotContainer {
     shooterButton.whileHeld(shooterCommand);
 
     //kill auto
-
     killAutoButton.whenPressed( killAutoObject);
     killAutoButton.whenReleased( killAutoObject);
 
     //processor
     processorButton.whileHeld(processorCommand);
+
     //loader
     loaderButton.whileHeld(runloader);
-
     }
-
   }
+
+   
 
   
 
